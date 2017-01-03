@@ -1,0 +1,19 @@
+{
+  "name": "tdd-todo-list",
+  "version": "1.0.0",
+  "description": "Test Driven Development Lab using Assert",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "node test/todo_tests.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wdi-sg/tdd-todo-list.git"
+  },
+  "dependencies": {
+    "uuid": "^3.0.1"
+  }
+}
