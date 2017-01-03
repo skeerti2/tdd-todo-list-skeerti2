@@ -10,7 +10,7 @@ This Lab will be your first chance to apply the concepts of Test Driven Developm
 
 ##Requirements
 
-You will write your tests one at a time using Assert. After writing a test, and verifying that it fails, you should proceed to write the code required to pass the test.
+You will write your tests one at a time using the [Node Assert Package](https://jeremiahalex.gitbooks.io/wdi-sg/content/02-js-jquery/js-tdd-intro/readme.html). After writing a test, and verifying that it fails, you should proceed to write the code required to pass the test.
 
 Your tests should be written inside the `test/todo_tests.js` file and your implementation inside `models/todo.js`.
 
