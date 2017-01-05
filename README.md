@@ -1,14 +1,18 @@
 # Test Driven Development Todo List
 
-This Lab will be your first chance to apply the concepts of Test Driven Development and also CRUD by building out the logic for a simple Todo List Application.
+This Lab will be your first chance to apply the concepts of Test Driven Development and also introduce you to CRUD by building out the logic for a simple Todo List Application.
+
+#### What is CRUD?
+CRUD is an acronym that stands for Create, Read, Update, Destroy. These are the basic operations that you can perform on data. Most websites and applications you interact with contain some CRUD actions: Creating a user (create), Listing comments (read), editing your profile (update), or deleting a video you uploaded (destroy).
 
 ## Getting Started
 
 * Fork and clone this repository
 * Run `npm install` to install dependencies
 * `npm test` - run test suite
+* `npm start` - run the REPL
 
-##Requirements
+## Requirements
 
 You will write your tests one at a time using the [Node Assert Package](https://jeremiahalex.gitbooks.io/wdi-sg/content/02-js-jquery/js-tdd-intro/readme.html). After writing a test, and verifying that it fails, you should proceed to write the code required to pass the test.
 

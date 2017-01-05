@@ -24,10 +24,10 @@ function destroyAll () {
 }
 
 module.exports = {
-  create,
-  list,
-  show,
-  update,
-  destroy,
-  destroyAll
+  create: create,
+  list: list,
+  show: show,
+  update: update,
+  destroy: destroy,
+  destroyAll: destroyAll
 }
