@@ -3,13 +3,13 @@ const uuidGenerator = require('uuid/v4')
 var todos = []
 
 // CREATE - params should be an object with keys for name, description and completed
-function create (name, description, completed) {
-  if (name && name.length >= 5) {
+function create (params) {
+  if (typeof params === 'object' && params.name.length >= 5) {
     todos.push({
       _id: uuidGenerator(),
-      name: name,
-      description: description || name,
-      completed: completed || false
+      name: params.name,
+      description: params.description || params.name,
+      completed: params.completed || false
     })
   } else {
     return false
@@ -30,14 +30,21 @@ function show (id) {
 }
 
 // UPDATE - params should be an object with KVPs for the fields to update
-function update (id, name, description, completed) {
+function update (id, params) {
   let todo = show(id)
 
-  if (todo) {
-    todo['name'] = name
-    todo['description'] = description
-    todo['completed'] = completed
+  if (todo && typeof params === 'object') {
+    if ((params.name && params.name.length < 5) || params.name === '') {
+      return false
+    }
+
+    todo.name = params.name || todo.name
+    todo.description = params.description || todo.description
+    todo.completed = params.completed || todo.completed
+
+    return true
   }
+  return false
 }
 
 // DESTROY (destroy & destroyAll)

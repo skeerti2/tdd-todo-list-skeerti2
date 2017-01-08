@@ -1,14 +1,20 @@
 const assert = require('assert')
 const todos = require('../models/todo.js')
+var todo
 
 /*
- * Core methods for rest of tests to operate
+ * Core methods
+ * fundamental to running of all unit tests below
 */
 // We must be able to access the Todo list
 assert.deepEqual(todos.list(), [], 'List should return an array of all todos')
 
 // We must be able to create a new Todo and store in Todos array
-todos.create('Do laundry', 'wash 2 batches of clothes and dry them', false)
+todos.create({
+  name: 'Do laundry',
+  description: 'wash 2 batches of clothes and dry them',
+  completed: false
+})
 assert.strictEqual(todos.list().length, 1, 'Should be able to create new Todo object with 3 params (name, description, completed)')
 
 // Example Test - we expect that when we run destroyAll, it should return true to let us know it was successful
@@ -20,15 +26,23 @@ assert.strictEqual(todos.list().length, 0, 'List should be empty after DestroyAl
  * Create method
 */
 todos.destroyAll()
-todos.create('Do laundry', 'wash 2 batches of clothes and dry them', false)
-assert.strictEqual(todos.list()[0]['name'], 'Do laundry', 'todo object should have a "name" property')
-assert.strictEqual(todos.list()[0]['description'], 'wash 2 batches of clothes and dry them', 'todo object should have a "description" property')
-assert.strictEqual(todos.list()[0]['completed'], false, 'todo object should have a "completed" property')
+todos.create({
+  name: 'Do laundry',
+  description: 'wash 2 batches of clothes and dry them',
+  completed: false
+})
+todo = todos.list()[0]
+assert.strictEqual(todo['name'], 'Do laundry', 'Todo object should have a "name" property')
+assert.strictEqual(todo['description'], 'wash 2 batches of clothes and dry them', 'Todo object should have a "description" property')
+assert.strictEqual(todo['completed'], false, 'Todo object should have a "completed" property')
 assert.ok(todos.list()[0]._id, 'Todo object should have an automatically generated UUID')
 
 todos.destroyAll()
-todos.create('Fold clothes')
-assert.ok(todos.list()[0]['description'], 'Should be able to create new Todo with just single param "name"')
+todos.create({
+  name: 'Fold clothes'
+})
+todo = todos.list()[0]
+assert.ok(todo['description'], 'Should be able to create new Todo with just single param "name"')
 
 todos.destroyAll()
 assert.strictEqual(todos.create(), false, 'Should not be able to create Todo without providing "name" param')
@@ -38,36 +52,69 @@ assert.strictEqual(todos.create('Sell'), false, 'Should not be able to create To
  * Show method
 */
 todos.destroyAll()
-todos.create('Buy groceries')
-var idToCheck = todos.list()[0]._id
-assert.equal(todos.show(idToCheck), todos.list()[0], 'Show should return Todo object with specified id')
+todos.create({
+  name: 'Buy groceries'
+})
+todo = todos.list()[0]
+assert.equal(todos.show(todo._id), todos.list()[0], 'Show should return Todo object with specified id')
 assert.strictEqual(todos.show('nonexistentUUID'), null, 'Show should return null if Todo with that id does not exist')
 
 /*
  * Destroy by id method
 */
 todos.destroyAll()
-todos.create('Fix study lamp')
-var idToDelete = todos.list()[0]._id
-todos.destroy(idToDelete)
+todos.create({
+  name: 'Fix study lamp'
+})
+todo = todos.list()[0]
+todos.destroy(todo._id)
 assert.strictEqual(todos.list().length, 0, 'Destroy should delete Todo with specific id')
 
 todos.destroyAll()
-todos.create('Fix study lamp!!')
-var idToDelete2 = todos.list()[0]._id
-assert.strictEqual(todos.destroy(idToDelete2), true, 'Destroy(id) should return true if deletion is successful')
+todos.create({
+  name: 'Fix study lamp!!'
+})
+todo = todos.list()[0]
+assert.strictEqual(todos.destroy(todo._id), true, 'Destroy(id) should return true if deletion is successful')
 assert.strictEqual(todos.destroy('nonexistentUUID'), false, 'Destroy(id) should return true if deletion is unsuccessful')
 
 /*
  * Update method
 */
 todos.destroyAll()
-todos.create('Book movie tickets')
+todos.create({
+  name: 'Book movie tickets'
+})
 var todoBeforeUpdate = Object.assign({}, todos.list()[0])
-todos.update(todos.list()[0]._id, 'Book movie tickets online at lunch', 'Try Lido then Cineleisure', false)
-assert.notDeepEqual(todos.list()[0], todoBeforeUpdate, 'Update should update Todo with specified id and new params')
+todos.update(todos.list()[0]._id, {
+  name: 'Book movie tickets online at lunch',
+  description: 'Try Lido then Cineleisure',
+  completed: true
+})
+todo = todos.list()[0]
+assert.notDeepEqual(todo, todoBeforeUpdate, 'Update should update Todo with specified id and new params')
+assert.strictEqual(todo.name, 'Book movie tickets online at lunch', 'Update should update Todo name with specified value in params')
+assert.strictEqual(todo.description, 'Try Lido then Cineleisure', 'Update should update Todo description with specified value in params')
+assert.strictEqual(todo.completed, true, 'Update should update Todo completed status with specified value in params')
 
-// Should allow individual fields to be updated
+todos.destroyAll()
+todos.create({
+  name: 'Get onions',
+  description: 'Get onions from pharmacy',
+  completed: false
+})
+todo = todos.list()[0]
+todos.update(todo._id, {description: 'Get onions from market, not pharmacy...'})
+assert.strictEqual(todo.description, 'Get onions from market, not pharmacy...', 'Update should allow individual fields to be updated')
+assert.strictEqual(todo.name, 'Get onions', 'Update should allow individual fields to be updated')
+assert.strictEqual(todo.completed, false, 'Update should allow individual fields to be updated')
 
-// Should NOT allow a name to be changed to blank or less than 5 characters in length
-// Should return true if an update is successful, false if otherwise
+assert.strictEqual(todos.update(todo._id, {description: 'Get meds from pharmacy'}), true, 'Update should return true if successful')
+assert.strictEqual(todos.update(todo._id), false, 'Update should return false if unsuccessful')
+
+todos.destroyAll()
+todos.create({
+  name: 'Bring fruits to grandma'
+})
+todo = todos.list()[0]
+assert.strictEqual(todos.update(todo._id, {name: ''}), false, 'Update should not allow name < 5 characters')
