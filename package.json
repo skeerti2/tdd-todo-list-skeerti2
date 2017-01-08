@@ -3,10 +3,8 @@
   "version": "1.0.0",
   "description": "Test Driven Development Lab using Assert",
   "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
+    "start": "node index.js",
     "test": "node test/todo_tests.js"
   },
   "repository": {
