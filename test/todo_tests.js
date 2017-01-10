@@ -1,6 +1,6 @@
 const assert = require('assert')
 const todos = require('../models/todo.js')
-var todo
+let todo
 
 /*
  * Core methods
