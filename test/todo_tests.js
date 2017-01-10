@@ -1,21 +1,25 @@
 const assert = require('assert')
 const todos = require('../models/todo.js')
-var todo
+
+let todo
 
 /*
  * Core methods
  * fundamental to running of all unit tests below
 */
 // We must be able to access the Todo list
+todos.destroyAll()
 assert.deepEqual(todos.list(), [], 'List should return an array of all todos')
 
 // We must be able to create a new Todo and store in Todos array
+todos.destroyAll()
 todos.create({
   name: 'Do laundry',
   description: 'wash 2 batches of clothes and dry them',
   completed: false
 })
-assert.strictEqual(todos.list().length, 1, 'Should be able to create new Todo object with 3 params (name, description, completed)')
+assert.strictEqual(todos.list().length, 1, 'Should be able to create new Todo object with 3 KVPs')
+
 
 // Example Test - we expect that when we run destroyAll, it should return true to let us know it was successful
 assert.strictEqual(todos.destroyAll(), true, 'DestroyAll should return true, to indicate success')
@@ -85,7 +89,7 @@ todos.destroyAll()
 todos.create({
   name: 'Book movie tickets'
 })
-var todoBeforeUpdate = Object.assign({}, todos.list()[0])
+let todoBeforeUpdate = Object.assign({}, todos.list()[0])
 todos.update(todos.list()[0]._id, {
   name: 'Book movie tickets online at lunch',
   description: 'Try Lido then Cineleisure',
