@@ -118,3 +118,4 @@ todos.create({
 })
 todo = todos.list()[0]
 assert.strictEqual(todos.update(todo._id, {name: ''}), false, 'Update should not allow name < 5 characters')
+assert.strictEqual(todos.update(todo._id, {name: '1234'}), false, 'Update should not allow name < 5 characters')
