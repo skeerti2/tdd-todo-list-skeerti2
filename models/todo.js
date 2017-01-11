@@ -1,7 +1,7 @@
 const uuidGenerator = require('uuid/v4')
 const fs = require('fs')
 
-var todos = require('../data.json').todos
+let todos = require('../data.json').todos
 
 function save () {
   const json = JSON.stringify({ todos: todos })
@@ -11,12 +11,14 @@ function save () {
 // CREATE - params should be an object with keys for name, description and completed
 function create (params) {
   if (typeof params === 'object' && params.name.length >= 5) {
-    todos.push({
+    let newTodo = {
       _id: uuidGenerator(),
       name: params.name,
       description: params.description || params.name,
       completed: params.completed || false
-    })
+    }
+
+    todos.push(newTodo)
 
     save()
     return true
@@ -49,7 +51,9 @@ function update (id, params) {
 
     todo.name = params.name || todo.name
     todo.description = params.description || todo.description
-    todo.completed = params.completed || todo.completed
+    if (typeof params.completed === 'boolean') {
+      todo.completed = params.completed
+    }
 
     save()
     return true
@@ -71,7 +75,7 @@ function destroy (id) {
 }
 
 function destroyAll () {
-  todos = []
+  todos.length = 0
 
   save()
   return true

@@ -19,7 +19,9 @@ todos.create({
   completed: false
 })
 assert.strictEqual(todos.list().length, 1, 'Should be able to create new Todo object with 3 KVPs')
-
+assert.strictEqual(todos.list()[0].hasOwnProperty('name'), true, 'Should have name property')
+assert.strictEqual(todos.list()[0].hasOwnProperty('description'), true, 'Should have name property')
+assert.strictEqual(todos.list()[0].hasOwnProperty('completed'), true, 'Should have name property')
 
 // Example Test - we expect that when we run destroyAll, it should return true to let us know it was successful
 assert.strictEqual(todos.destroyAll(), true, 'DestroyAll should return true, to indicate success')
