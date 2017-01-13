@@ -1,9 +1,11 @@
 # Test Driven Development Todo List
 
 This is Part 1 of a series of labs working towards building your first full stack web app. 
-[Part 2 - Mongo todo list](https://github.com/wdi-sg/mongo-todo-list)
-[Part 3 - Express todo list](https://github.com/wdi-sg/express-todo-list-pt1)
-Part 4 - to come
+
+- Part 1 - TDD todo list (this repo)
+- [Part 2 - Mongo todo list](https://github.com/wdi-sg/mongo-todo-list)
+- [Part 3 - Express todo list](https://github.com/wdi-sg/express-todo-list-pt1)
+- Part 4 - to come
 
 This Lab will be your first chance to apply the concepts of Test Driven Development and also introduce you to CRUD by building out the logic for a simple Todo List Application.
 
