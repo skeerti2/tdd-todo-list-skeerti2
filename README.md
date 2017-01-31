@@ -25,7 +25,7 @@ CRUD is an acronym that stands for Create, Read, Update, Destroy. These are the 
 
 You will write your tests one at a time using the [Node Assert Package](https://jeremiahalex.gitbooks.io/wdi-sg/content/02-js-jquery/js-tdd-intro/readme.html). After writing a test, and verifying that it fails, you should proceed to write the code required to pass the test.
 
-Your tests should be written inside the `test/todo_tests.js` file and your implementation inside `models/todo.js`.
+Your tests should be written inside the `test/todo_tests.js` file and your implementation inside `controllers/todo.js`.
 
 Todos should be stored as an array of Todo Objects. Each instance of a Todo should store a unique id that can be used to find it later. Use the included UUID generator to add one upon creation.
 
