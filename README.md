@@ -34,7 +34,7 @@ You should as a minimum implement the following features. Each will likely requi
 ### CREATE
 
 #### Create(params)
-* Should be able to create a new Todo with the following KVPs in the `params` object:
+* Should be able to create a new Todo with the following KVPs (Key-Value Pairs) in the `params` object:
   * `name`
   * `description`
   * `completed` (true/false)
@@ -55,8 +55,8 @@ You should as a minimum implement the following features. Each will likely requi
 ### UPDATE
 
 #### Update(id, updatedParams)
-* Should be able to update the Todo with the given id, using the following KVPs in the `updatedParams` object:
-  * `name
+* Should be able to update the Todo with the given id, using the following KVPs (Key-Value Pairs) in the `updatedParams` object:
+  * `name`
   * `description`
   * `completed` (true/false)
 * Should allow individual fields to be updated
